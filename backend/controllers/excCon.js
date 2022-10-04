@@ -17,16 +17,30 @@ const postHandler = thencat(async (req,res)=>{
     }
     
     const newexcercise = await Excr.create({desc:  req.body.desc, title : req.body.title,tag : req.body.tag});
-    res.send(200).json(newexcercise);
+    res.status(200).json(newexcercise);
 
 })
 
 const putHandler = thencat(async (req,res)=>{
-        console.log('puthandler');
+       const excercise = await Excr.findById(req.params.id)
+
+       if (!excercise){
+           res.status(400);
+           throw new Error('not found with that id');
+       }
+       const upexcercise = await Excr.findByIdAndUpdate(req.params.id,req.body,{new:true});
+       res.status(200).json(upexcercise);
 })
 
 const deleteHandler = thencat(async (req,res)=>{
-    console.log('delhandler');
+    const excercisestodel = await Excr.findById(req.params.id);
+    if (!excercisestodel){
+        res.status(400)
+        throw new Error('not found with that id del');
+    } 
+
+    await excercisestodel.remove()
+
 })
 
 module.exports = {getHandler ,postHandler, putHandler,deleteHandler};
