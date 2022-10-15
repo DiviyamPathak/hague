@@ -1,13 +1,14 @@
 const Express = require('express');
+const {getHandler ,postHandler, putHandler,deleteHandler} = require('../controllers/excCon.js')
 const router = Express.Router();
 
-router.get("/", (req,res)=> {res.json({msg:`hello`})});
+router.get('/', getHandler);
 
-router.post("/", (req,res)=> {res.json({msg:`hello`})});
+router.post("/", postHandler);
 
-router.put("/:id", (req,res)=> {res.json({msg:`hello`})});
+router.put("/:id", putHandler);
 
-router.delete("/:id", (req,res)=> {res.json({msg:req})});
+router.delete("/:id", deleteHandler);
 
 
 

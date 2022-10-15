@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const excSchema =  mongoose.Schema(
     {
-        title:{text:String,required:true },
-        desc:{text:String,required:true},
-        tag:{text:String,required:true}
+        title:{type : String, required : [true] },
+        desc:{type : String, required : [true]},
+        tag:{type : String, required : [true]}
     }
     
 )
 
-module.exports = mongoose.model('excercises',excSchema);
+module.exports = mongoose.model('excr',excSchema);
