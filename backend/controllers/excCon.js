@@ -1,5 +1,3 @@
-
-
 const Excr = require('../dbModel.js');
 const thencat = require('express-async-handler');
 

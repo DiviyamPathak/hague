@@ -5,7 +5,8 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-app.use("/api/ex/",require('./apis/excRout.js'))
+app.use("/apis/ex/",require('./apis/excRout.js'));
+app.use('/apis/users/',require('./apis/UserRoutes'));
 
 const connectDB = async () => {
     try {
