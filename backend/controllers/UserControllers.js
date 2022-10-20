@@ -1,6 +1,7 @@
 const users = require('../dbUser.js');
 const thencat = require('express-async-handler');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const RegisterUser = thencat(async (req,res) => {
     if (!req.body.username || !req.body.email || !req.body.pass){
@@ -19,9 +20,29 @@ const RegisterUser = thencat(async (req,res) => {
 
 })
 
-const LoginUser = (req,res) => {
-    res.json({msg:"login user"})
-}
+const LoginUser = thencat(async (req,res) => {
+    const email= req.body.email;
+    const passw= req.body.pass;
+    const userlogin = await users.findOne({email})
+
+    const gentok = (id)=>{return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'1d'})}
+
+    if (userlogin && bcrypt.compare(passw, userlogin.Password )){
+        res.json(
+            {
+                _id:userlogin._id,
+                Username:userlogin.UserName,
+                Email:userlogin.Email,
+                token:gentok(userlogin._id)
+            }
+        )
+    }
+    else{
+        res.status(400);
+        throw new Error('invalid credentials');
+    }
+})
+
 const DataUser = (req,res) => {
     res.json({msg:"data user"})
 }
