@@ -44,7 +44,7 @@ const LoginUser = thencat(async (req,res) => {
 })
 
 const DataUser = (req,res) => {
-    res.json({msg:"data user"})
+    res.status(200).json(req.user)
 }
 
 module.exports = { RegisterUser,LoginUser,DataUser};
