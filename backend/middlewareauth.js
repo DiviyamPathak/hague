@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const thencat = require('express-async-handler')
 const users = require('./dbUser')
+
 const protec = thencat(async (req,res,next) =>{
     let token 
     if (req.headers.authorization && 
@@ -24,4 +25,4 @@ const protec = thencat(async (req,res,next) =>{
     }
 
 })
-module.exports = protec
+module.exports = { protec }

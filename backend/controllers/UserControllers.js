@@ -21,9 +21,9 @@ const RegisterUser = thencat(async (req,res) => {
 })
 
 const LoginUser = thencat(async (req,res) => {
-    const email= req.body.email;
+    const Email= req.body.email;
     const passw= req.body.pass;
-    const userlogin = await users.findOne({email})
+    const userlogin = await users.findOne({Email})
 
     const gentok = (id)=>{return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'1d'})}
 
